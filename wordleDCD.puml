@@ -7,6 +7,7 @@ enum wordle.LetterState {
 }
 class wordle.WordleUserInterface {
 - WordleRulesController wordleRulesController
++ <<Create>> WordleUserInterface(WordleRulesController)
 + void run()
 - Word guessAWord()
 - void renderCandidateSolutions(CandidateSolutions)
@@ -15,6 +16,7 @@ class wordle.Word {
 - {static} char NO_LETTER
 - int totalPossibleLetters
 - char[] letters
++ <<Create>> Word(int)
 + LetterState[] determineTheStateOfEachLetter(Word)
 + boolean equals(Word)
 }
@@ -25,6 +27,7 @@ class wordle.WordleRulesController {
 - Dictionary dictionary
 - Word solution
 - CandidateSolutions candidateSolutions
++ <<Create>> WordleRulesController(int,int)
 + boolean isGameOver()
 - boolean hasGuessedTheCorrectWord()
 + CandidateSolutions getCandidateSolutions()
@@ -37,6 +40,7 @@ class wordle.CandidateSolutions {
 - int currentGuess
 - int totalPossibleGuesses
 - Word[] words
++ <<Create>> CandidateSolutions(int)
 + Word[] getWords()
 + void guess(Word)
 + boolean hasAnotherTurn()
