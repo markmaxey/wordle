@@ -1,0 +1,45 @@
+@startuml
+enum wordle.LetterState {
++  notYetChosen
++  notInWord
++  wrongPosition
++  right
+}
+class wordle.WordleUserInterface {
+- WordleRulesController wordleRulesController
++ void run()
+- Word guessAWord()
+- void renderCandidateSolutions(CandidateSolutions)
+}
+class wordle.Word {
+- {static} char NO_LETTER
+- int totalPossibleLetters
+- char[] letters
++ LetterState[] determineTheStateOfEachLetter(Word)
++ boolean equals(Word)
+}
+class wordle.Dictionary {
++ Word chooseSolution(int)
+}
+class wordle.WordleRulesController {
+- Dictionary dictionary
+- Word solution
+- CandidateSolutions candidateSolutions
++ boolean isGameOver()
+- boolean hasGuessedTheCorrectWord()
++ CandidateSolutions getCandidateSolutions()
++ void guess(Word)
+}
+class wordle.Main {
++ {static} void main(String[])
+}
+class wordle.CandidateSolutions {
+- int currentGuess
+- int totalPossibleGuesses
+- Word[] words
++ Word[] getWords()
++ void guess(Word)
++ boolean hasAnotherTurn()
++ boolean has(Word)
+}
+@enduml
