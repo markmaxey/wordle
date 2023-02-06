@@ -1,0 +1,245 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": false,
+    "cutClient": false,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": false,
+    "cutConstructors": false
+  },
+  "graphTraversal": {
+    "forwardDepth": 7,
+    "backwardDepth": 7,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "BothDirections" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 4,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "wordle.Main",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_782091773 { 
+   	label=wordle
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   CandidateSolutions782091773[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CandidateSolutions</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   currentGuess: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   totalPossibleGuesses: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   words: Word[] [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ CandidateSolutions(totalPossibleGuesses: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getWords(): Word[]</TD></TR>
+<TR><TD ALIGN="LEFT" >+ guess(solution: Word, theGuess: char[])</TD></TR>
+<TR><TD ALIGN="LEFT" >+ has(solution: Word): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ hasAnotherTurn(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Dictionary782091773[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Dictionary</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ chooseSolution(totalPossibleLetters: int): Word</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Letter782091773[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Letter</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   state: LetterState [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   value: char [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Letter()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Letter(value: char, state: LetterState)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getState(): LetterState</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getValue(): char</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+LetterState782091773[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)LetterState</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   notInWord: LetterState [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   notYetChosen: LetterState [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   right: LetterState [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   wrongPosition: LetterState [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ valueOf(name: String): LetterState</TD></TR>
+<TR><TD ALIGN="LEFT" >+ values(): LetterState[]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+Main782091773[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Main</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ main(argv: String[])</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Word782091773[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Word</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   letters: Letter[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   totalPossibleLetters: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Word(totalPossibleLetters: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Word(solution: Word, theGuess: char[])</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+WordleRulesController782091773[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)WordleRulesController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   candidateSolutions: CandidateSolutions [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   dictionary: Dictionary [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   solution: Word [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ WordleRulesController(totalPossibleLetters: int, totalPossibleGuesses: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getCandidateSolutions(): CandidateSolutions</TD></TR>
+<TR><TD ALIGN="LEFT" >+ guess(theGuess: char[])</TD></TR>
+<TR><TD ALIGN="LEFT" >- hasGuessedTheCorrectWord(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isGameOver(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+WordleUserInterface782091773[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)WordleUserInterface</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   wordleRulesController: WordleRulesController [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ WordleUserInterface(wordleRulesController: WordleRulesController)</TD></TR>
+<TR><TD ALIGN="LEFT" >- guessAWord(): char[]</TD></TR>
+<TR><TD ALIGN="LEFT" >- renderCandidateSolutions(candidateSolutions: CandidateSolutions)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ run()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+CandidateSolutions782091773 -> Word782091773[label="words
+[0..*]"];
+Dictionary782091773 -> Word782091773[label="chooseSolution() -> Word()"];
+Letter782091773 -> LetterState782091773[label="state
+[0..1]"];
+Main782091773 -> WordleRulesController782091773[label="main() -> WordleRulesController()"];
+Word782091773 -> Letter782091773[label="letters
+[0..*]"];
+WordleRulesController782091773 -> CandidateSolutions782091773[label="candidateSolutions
+[0..1]"];
+WordleRulesController782091773 -> Dictionary782091773[label="dictionary
+[0..1]"];
+WordleRulesController782091773 -> Word782091773[label="solution
+[0..1]"];
+WordleUserInterface782091773 -> WordleRulesController782091773[label="wordleRulesController
+[0..1]"];
+    
+}
+@enduml

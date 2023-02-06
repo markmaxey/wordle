@@ -2,22 +2,24 @@ package wordle;
 
 import java.util.Arrays;
 
-import static wordle.LetterState.notYetChosen;
-
 final public class Word {
-    private static final char NO_LETTER = 0;
     private final int totalPossibleLetters;
-    private final char[] letters;
+    private final Letter[] letters;
 
     public Word(final int totalPossibleLetters) {
         this.totalPossibleLetters = totalPossibleLetters;
 
-        letters = new char[totalPossibleLetters];
-        Arrays.fill(letters, NO_LETTER);
+        letters = new Letter[totalPossibleLetters];
+        Arrays.fill(letters, new Letter());
     }
 
-    public LetterState[] determineTheStateOfEachLetter(final Word solution) {
-        return null; // TODO: Add actual logic here
+    public Word(final Word solution, final char[] theGuess) {
+        this.totalPossibleLetters = theGuess.length;
+        letters = new Letter[theGuess.length];
+        for(int ndx=0; ndx<theGuess.length; ndx++) {
+            final LetterState letterState = null; // TODO: Add logic here to figure out the correct state
+            letters[ndx] = new Letter(theGuess[ndx], letterState);
+        }
     }
 
     public boolean equals(final Word that) {

@@ -15,11 +15,11 @@ final public class WordleUserInterface {
         renderCandidateSolutions(wordleRulesController.getCandidateSolutions());
     }
 
-    private Word guessAWord() {
+    private char[] guessAWord() {
         return null; // TODO: Ask for the user to actually guess a word
     }
 
     private void renderCandidateSolutions(final CandidateSolutions candidateSolutions) {
-        // TODO: Do UI magic here - colors, styles, etc. based on each word's LetterStates
+        // TODO: Do UI magic here - colors, styles, etc. based on each letter's value & LetterState
     }
 }

@@ -14,8 +14,8 @@ final public class CandidateSolutions {
         return words;
     }
 
-    public void guess(final Word word) {
-        words[currentGuess++] = word;
+    public void guess(final Word solution, final char[] theGuess) {
+        words[currentGuess++] = new Word(solution, theGuess);
     }
 
     public boolean hasAnotherTurn() {

@@ -24,7 +24,7 @@ final public class WordleRulesController {
         return candidateSolutions;
     }
 
-    public void guess(final Word candidateWord) {
-        candidateSolutions.guess(candidateWord);
+    public void guess(final char[] theGuess) {
+        candidateSolutions.guess(solution, theGuess);
     }
 }
