@@ -25,7 +25,7 @@ final public class Word {
     public boolean equals(final Word that) {
         boolean isEquals = true;
         for(int letterNum=0; letterNum < totalPossibleLetters; letterNum++) {
-            if (this.letters[letterNum] != that.letters[letterNum]) isEquals = false;
+            if (this.letters[letterNum].equals(that.letters[letterNum])) isEquals = false;
         }
         return isEquals;
     }
