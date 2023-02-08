@@ -15,7 +15,7 @@ class Word {
     constructor(solution: Word, theGuess: CharArray) {
         totalPossibleLetters = theGuess.size
         letters = Array(theGuess.size) { ndx ->
-            val letterState: LetterState? = null // TODO: Add logic here to figure out the correct state
+            val letterState: LetterState = LetterState.notInWord // TODO: Add logic here to figure out the correct state
             Letter(theGuess[ndx], letterState)
         }
     }
