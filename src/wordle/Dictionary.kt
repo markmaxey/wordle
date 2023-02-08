@@ -1,8 +1,8 @@
-package wordle;
+package wordle
 
-final public class Dictionary {
-    public Word chooseSolution(int totalPossibleLetters) {
+class Dictionary {
+    fun chooseSolution(totalPossibleLetters: Int): Word {
         // TODO: In real life, this would pull a random word from an actual dictionary database
-        return new Word(totalPossibleLetters);
+        return Word(totalPossibleLetters)
     }
 }

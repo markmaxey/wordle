@@ -1,32 +1,30 @@
-package wordle;
+package wordle
 
-import java.util.Arrays;
+import java.util.*
 
-final public class Word {
-    private final int totalPossibleLetters;
-    private final Letter[] letters;
+class Word {
+    private val totalPossibleLetters: Int
+    private val letters: Array<Letter>
 
-    public Word(final int totalPossibleLetters) {
-        this.totalPossibleLetters = totalPossibleLetters;
-
-        letters = new Letter[totalPossibleLetters];
-        Arrays.fill(letters, new Letter());
+    constructor(totalPossibleLetters: Int) {
+        this.totalPossibleLetters = totalPossibleLetters
+        letters = Array(totalPossibleLetters) { Letter() }
+        Arrays.fill(letters, Letter())
     }
 
-    public Word(final Word solution, final char[] theGuess) {
-        this.totalPossibleLetters = theGuess.length;
-        letters = new Letter[theGuess.length];
-        for(int ndx=0; ndx<theGuess.length; ndx++) {
-            final LetterState letterState = null; // TODO: Add logic here to figure out the correct state
-            letters[ndx] = new Letter(theGuess[ndx], letterState);
+    constructor(solution: Word, theGuess: CharArray) {
+        totalPossibleLetters = theGuess.size
+        letters = Array(theGuess.size) { ndx ->
+            val letterState: LetterState? = null // TODO: Add logic here to figure out the correct state
+            Letter(theGuess[ndx], letterState)
         }
     }
 
-    public boolean equals(final Word that) {
-        boolean isEquals = true;
-        for(int letterNum=0; letterNum < totalPossibleLetters; letterNum++) {
-            if (this.letters[letterNum].equals(that.letters[letterNum])) isEquals = false;
+    fun equals(that: Word?): Boolean {
+        var isEquals = true
+        for (letterNum in 0 until totalPossibleLetters) {
+            if (letters[letterNum].equals(that!!.letters[letterNum])) isEquals = false
         }
-        return isEquals;
+        return isEquals
     }
 }

@@ -1,30 +1,20 @@
-package wordle;
+package wordle
 
-final public class WordleRulesController {
-    private final Dictionary dictionary = new Dictionary();
-    private final Word solution;
-    private final CandidateSolutions candidateSolutions;
+class WordleRulesController(
+        val totalPossibleLetters: Int,
+        totalPossibleGuesses: Int) {
+    private val dictionary = Dictionary()
+    private val solution: Word = dictionary.chooseSolution(totalPossibleLetters)
+    val candidateSolutions: CandidateSolutions = CandidateSolutions(totalPossibleLetters, totalPossibleGuesses)
 
-    public WordleRulesController(
-            final int totalPossibleLetters,
-            final int totalPossibleGuesses) {
-        solution = dictionary.chooseSolution(totalPossibleLetters);
-        candidateSolutions = new CandidateSolutions(totalPossibleGuesses);
+    val isGameOver: Boolean
+        get() = hasGuessedTheCorrectWord() || !candidateSolutions.hasAnotherTurn()
+
+    private fun hasGuessedTheCorrectWord(): Boolean {
+        return candidateSolutions.has(solution)
     }
 
-    public boolean isGameOver() {
-        return hasGuessedTheCorrectWord() || !candidateSolutions.hasAnotherTurn();
-    }
-
-    private boolean hasGuessedTheCorrectWord() {
-        return candidateSolutions.has(solution);
-    }
-
-    public CandidateSolutions getCandidateSolutions() {
-        return candidateSolutions;
-    }
-
-    public void guess(final char[] theGuess) {
-        candidateSolutions.guess(solution, theGuess);
+    fun guess(theGuess: CharArray) {
+        candidateSolutions.guess(solution, theGuess)
     }
 }

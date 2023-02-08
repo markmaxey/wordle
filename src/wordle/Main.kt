@@ -1,14 +1,12 @@
-package wordle;
+package wordle
 
-public class Main {
-    public static void main(String[] argv) {
-        final int totalPossibleLetters = Integer.parseInt(argv[0]);
-        final int totalPossibleGuesses = Integer.parseInt(argv[1]);
-
-        WordleRulesController wordleRulesController =
-                new WordleRulesController(totalPossibleLetters, totalPossibleGuesses);
-
-        WordleUserInterface wordleUserInterface = new WordleUserInterface(wordleRulesController);
-        wordleUserInterface.run();
+object Main {
+    @JvmStatic
+    fun main(argv: Array<String>) {
+        val totalPossibleLetters = argv[0].toInt()
+        val totalPossibleGuesses = argv[1].toInt()
+        val wordleRulesController = WordleRulesController(totalPossibleLetters, totalPossibleGuesses)
+        val wordleUserInterface = WordleUserInterface(wordleRulesController)
+        wordleUserInterface.run()
     }
 }

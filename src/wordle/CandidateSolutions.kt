@@ -1,31 +1,23 @@
-package wordle;
+package wordle
 
-final public class CandidateSolutions {
-    private int currentGuess = 0;
-    private final int totalPossibleGuesses;
-    private final Word[] words;
+class CandidateSolutions(
+        totalPossibleLetters: Int,
+        private val totalPossibleGuesses: Int) {
+    private var currentGuess = 0
+    private val words = Array(totalPossibleGuesses) { Word(totalPossibleLetters) }
 
-    public CandidateSolutions(final int totalPossibleGuesses) {
-        this.totalPossibleGuesses = totalPossibleGuesses;
-        this.words = new Word[totalPossibleGuesses];
+    fun guess(solution: Word, theGuess: CharArray) {
+        words[currentGuess++] = Word(solution, theGuess)
     }
 
-    public Word[] getWords() {
-        return words;
+    fun hasAnotherTurn(): Boolean {
+        return currentGuess < totalPossibleGuesses
     }
 
-    public void guess(final Word solution, final char[] theGuess) {
-        words[currentGuess++] = new Word(solution, theGuess);
-    }
-
-    public boolean hasAnotherTurn() {
-        return currentGuess < totalPossibleGuesses;
-    }
-
-    public boolean has(final Word solution) {
-        for(int guessNum=0; guessNum < words.length; guessNum++) {
-            if (words[guessNum].equals(solution)) return true;
+    fun has(solution: Word): Boolean {
+        for (guessNum in words.indices) {
+            if (words[guessNum].equals(solution)) return true
         }
-        return false;
+        return false
     }
 }

@@ -1,28 +1,14 @@
-package wordle;
+package wordle
 
-public class Letter {
-    private static final char NOT_YET_CHOSEN = 0;
-    private final char value;
-    private final LetterState state;
+class Letter(
+        val value: Char = NOT_YET_CHOSEN,
+        val state: LetterState = LetterState.notYetChosen) {
 
-    public Letter() {
-        this(NOT_YET_CHOSEN, LetterState.notYetChosen);
+    fun equals(that: Letter?): Boolean {
+        return that != null && value == that.value
     }
 
-    public Letter(final char value, final LetterState state) {
-        this.value = value;
-        this.state = state;
-    }
-
-    public char getValue() {
-        return value;
-    }
-
-    public LetterState getState() {
-        return state;
-    }
-
-    public boolean equals(final Letter that) {
-        return that != null && this.value == that.value;
+    companion object {
+        private const val NOT_YET_CHOSEN = 0.toChar()
     }
 }

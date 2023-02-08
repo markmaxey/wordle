@@ -1,5 +1,5 @@
-package wordle;
+package wordle
 
-public enum LetterState {
+enum class LetterState {
     notYetChosen, notInWord, wrongPosition, right
 }
